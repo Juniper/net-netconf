@@ -292,5 +292,5 @@ either expressed or implied, of Juniper Networks.
 
 == AUTHORS AND CONTRIBUTORS:
 * {Jeremy Schulman}[www.linkedin.com/in/jeremyschulman], Juniper Networks
-* Ankit Jain, Juniper Networks
+* {Ankit Jain}[http://www.linkedin.com/in/ankitj093], Juniper Networks
 

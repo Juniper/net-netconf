@@ -2,7 +2,9 @@ require 'net/netconf'
 
 puts "NETCONF v.#{Netconf::VERSION}"
 
-login = { :target => 'vsrx', :username => "jeremy", :password => "jeremy1" }
+login = { :target => 'srx210', 
+  :username => "jeremy", 
+  :password => "jeremy1" }
 
 Netconf::SSH.new( login ){ |dev|  
 
