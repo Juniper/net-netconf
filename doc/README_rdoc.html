@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>README - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body class="file">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Netconf.html">Netconf</a>
+  
+    <li><a href="./Netconf/CommitError.html">Netconf::CommitError</a>
+  
+    <li><a href="./Netconf/EditError.html">Netconf::EditError</a>
+  
+    <li><a href="./Netconf/InitError.html">Netconf::InitError</a>
+  
+    <li><a href="./Netconf/JUNOS.html">Netconf::JUNOS</a>
+  
+    <li><a href="./Netconf/LockError.html">Netconf::LockError</a>
+  
+    <li><a href="./Netconf/NcDevice.html">Netconf::NcDevice</a>
+  
+    <li><a href="./Netconf/NcDevice/Localhost.html">Netconf::NcDevice::Localhost</a>
+  
+    <li><a href="./Netconf/OpenError.html">Netconf::OpenError</a>
+  
+    <li><a href="./Netconf/RPC.html">Netconf::RPC</a>
+  
+    <li><a href="./Netconf/RPC/Builder.html">Netconf::RPC::Builder</a>
+  
+    <li><a href="./Netconf/RPC/Executor.html">Netconf::RPC::Executor</a>
+  
+    <li><a href="./Netconf/RPC/JUNOS.html">Netconf::RPC::JUNOS</a>
+  
+    <li><a href="./Netconf/RPC/Standard.html">Netconf::RPC::Standard</a>
+  
+    <li><a href="./Netconf/RpcError.html">Netconf::RpcError</a>
+  
+    <li><a href="./Netconf/SSH.html">Netconf::SSH</a>
+  
+    <li><a href="./Netconf/Serial.html">Netconf::Serial</a>
+  
+    <li><a href="./Netconf/StateError.html">Netconf::StateError</a>
+  
+    <li><a href="./Netconf/Telnet.html">Netconf::Telnet</a>
+  
+    <li><a href="./Netconf/TransSerial.html">Netconf::TransSerial</a>
+  
+    <li><a href="./Netconf/TransSerial/JUNOS.html">Netconf::TransSerial::JUNOS</a>
+  
+    <li><a href="./Netconf/TransTelnet.html">Netconf::TransTelnet</a>
+  
+    <li><a href="./Netconf/TransTelnet/JUNOS.html">Netconf::TransTelnet::JUNOS</a>
+  
+    <li><a href="./Netconf/Transport.html">Netconf::Transport</a>
+  
+    <li><a href="./Netconf/ValidateError.html">Netconf::ValidateError</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation" class="description">
+  
+<h1 id="label-Net%3A%3ANetconf">Net::Netconf</h1>
+<ul><li>
+<p><a
+href="http://github.com/Juniper-Workflow/net-netconf">github.com/Juniper-Workflow/net-netconf</a></p>
+</li></ul>
+
+<h2 id="label-DESCRIPTION%3A">DESCRIPTION:</h2>
+
+<p>Device management using the NETCONF protocol as specified in <a
+href="http://tools.ietf.org/html/rfc4741">RFC4741</a> and <a
+href="http://tools.ietf.org/html/rfc6241">RFC6241</a>.</p>
+
+<h2 id="label-FEATURES%3A">FEATURES:</h2>
+<ul><li>
+<p>Extensible protocol transport framework for SSH and non-SSH</p>
+<ul><li>
+<p>SSH transport using <a href="http://net-ssh.rubyforge.org">Net::SSH</a></p>
+</li><li>
+<p>Telnet transport using Net::Telnet (Ruby Library)</p>
+</li><li>
+<p>Serial transport using <a
+href="http://ruby-serialport.rubyforge.org/">Ruby/SerialPort</a></p>
+</li></ul>
+</li><li>
+<p>NETCONF Standard RPCs</p>
+<ul><li>
+<p>get-config, edit-config</p>
+</li><li>
+<p>lock, unlock</p>
+</li><li>
+<p>validate, discard-changes</p>
+</li></ul>
+</li><li>
+<p>Flexible RPC mechanism</p>
+<ul><li>
+<p><a href="Netconf/RPC/Builder.html">Netconf::RPC::Builder</a> to metaprogram
+RPCs</p>
+</li><li>
+<p>Vendor extension framework for custom RPCs</p>
+</li></ul>
+</li><li>
+<p>XML processing using <a href="http://nokogiri.org">Nokogiri</a></p>
+</li></ul>
+
+<h2 id="label-SUPPORT%3A">SUPPORT:</h2>
+
+<p>This software is not officially supported by Juniper Networks, but by a
+team dedicated to helping customers, partners, and the development
+community.  To report bug-fixes, issues, susggestions, please contact  <a
+href="mailto:jschulman@juniper.net">Jeremy Schulman</a>.</p>
+
+<h2 id="label-SYNOPSIS%3A">SYNOPSIS:</h2>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'net/netconf'</span>
+
+<span class="ruby-comment"># create the options hash for the new NETCONF session.  If you are</span>
+<span class="ruby-comment"># using ssh-agent, then omit the :password</span>
+
+<span class="ruby-identifier">login</span> = { :<span class="ruby-identifier">target</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'vsrx'</span>, :<span class="ruby-identifier">username</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;jeremy&quot;</span>, :<span class="ruby-identifier">password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;jeremy1&quot;</span> }
+
+<span class="ruby-comment"># provide a block and the session will open, execute, and close</span>
+
+<span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">SSH</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">login</span> ){ <span class="ruby-operator">|</span><span class="ruby-identifier">dev</span><span class="ruby-operator">|</span>  
+
+  <span class="ruby-comment"># perform the RPC command:</span>
+  <span class="ruby-comment"># &lt;rpc&gt;</span>
+  <span class="ruby-comment">#    &lt;get-chassis-inventory/&gt;</span>
+  <span class="ruby-comment"># &lt;/rpc&gt;</span>
+
+  <span class="ruby-identifier">inv</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_chassis_inventory</span>
+
+  <span class="ruby-comment"># The response is in Nokogiri XML format for easy processing ...</span>
+
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Chassis: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">inv</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'chassis/description'</span>).<span class="ruby-identifier">text</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Chassis Serial-Number: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">inv</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'chassis/serial-number'</span>).<span class="ruby-identifier">text</span>  
+}
+</pre>
+
+<p>Alternative explicity open, execute RPCs, and close</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'net/netconf'</span> 
+
+<span class="ruby-identifier">dev</span> = <span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">SSH</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">login</span> )
+<span class="ruby-identifier">dev</span>.<span class="ruby-identifier">open</span>
+
+<span class="ruby-identifier">inv</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_chassis_inventory</span>
+
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Chassis: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">inv</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'chassis/description'</span>).<span class="ruby-identifier">text</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Chassis Serial-Number: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">inv</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'chassis/serial-number'</span>).<span class="ruby-identifier">text</span>  
+
+<span class="ruby-identifier">dev</span>.<span class="ruby-identifier">close</span>
+</pre>
+
+<h2 id="label-REQUIREMENTS%3A">REQUIREMENTS:</h2>
+<ul><li>
+<p>Ruby 1.8.7 or 1.9.3</p>
+</li><li>
+<p>Nokogiri &gt;= 1.5.5</p>
+</li><li>
+<p>Net::SSH &gt;= 2.5.2</p>
+</li><li>
+<p>SerialPort &gt;= 1.0.4 (<em>optional</em>)</p>
+</li></ul>
+
+<h2 id="label-INSTALL%3A">INSTALL:</h2>
+
+<p>The <a href="Netconf.html">Netconf</a> module is not yet posted on
+RubyForge, but will be in the near future.</p>
+
+<p>For now, download the netconf gem file from <a
+href="http://github.com/Juniper-Workflow/net-netconf">github</a>, and:</p>
+<ul><li>
+<p>gem install netconf-&lt;<em>version</em>&gt;.gem</p>
+</li></ul>
+
+<h2 id="label-USING+NETCONF%3A">USING NETCONF:</h2>
+
+<h3 id="label-Remote+Procedure+Calls+%28RPCs%29%3A">Remote Procedure Calls (RPCs):</h3>
+
+<p>Each <a href="Netconf.html">Netconf</a> session provides a readable
+instance variable - <strong>rpc</strong>. This is used to execute Remote
+Procedure Calls (RPCs).  The @rpc will include the NETCONF standard RPCs,
+any vendor specific extension, as well as the ability  to metaprogram new
+onces via method_missing.</p>
+
+<p>Here are some examples to illustrate the metaprogamming:</p>
+
+<p>Without any parameters, the RPC is created by swapping underscores (_) to
+hyphens (-):</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'net/netconf'</span>
+
+<span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_chassis_inventory</span>
+
+<span class="ruby-comment"># &lt;rpc&gt;</span>
+<span class="ruby-comment">#    &lt;get-chassis-inventory/&gt;</span>
+<span class="ruby-comment"># &lt;/rpc&gt;</span>
+</pre>
+
+<p>You can optionally provide RPC parameters as a hash:</p>
+
+<pre class="ruby"><span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_interface_information</span>( :<span class="ruby-identifier">interface_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ge-0/0/0'</span>, :<span class="ruby-identifier">terse</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> )
+
+<span class="ruby-comment"># &lt;rpc&gt;</span>
+<span class="ruby-comment">#    &lt;get-interface-information&gt;</span>
+<span class="ruby-comment">#       &lt;interface-name&gt;ge-0/0/0&lt;/interface-name&gt;</span>
+<span class="ruby-comment">#       &lt;terse/&gt;</span>
+<span class="ruby-comment">#   &lt;/get-interface-information&gt;</span>
+<span class="ruby-comment"># &lt;/rpc&gt;</span>
+</pre>
+
+<p>You can additionally supply attributes that get assigned to the toplevel
+element.  In this case You must enclose the parameters hash to disambiquate
+it from the attributes hash, or declare  a variable for the parameters
+hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_interface_information</span>({ :<span class="ruby-identifier">interface_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ge-0/0/0'</span>, :<span class="ruby-identifier">terse</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> }, 
+   { :<span class="ruby-identifier">format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'text'</span>} )
+
+<span class="ruby-comment"># &lt;rpc&gt;</span>
+<span class="ruby-comment">#    &lt;get-interface-information format='text'&gt;</span>
+<span class="ruby-comment">#       &lt;interface-name&gt;ge-0/0/0&lt;/interface-name&gt;</span>
+<span class="ruby-comment">#       &lt;terse/&gt;</span>
+<span class="ruby-comment">#   &lt;/get-interface-information&gt;</span>
+<span class="ruby-comment"># &lt;/rpc&gt;</span>
+</pre>
+
+<p>If you want to provide attributes, but no parameters, then:</p>
+
+<pre class="ruby"><span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_chassis_inventory</span>( <span class="ruby-keyword">nil</span>, :<span class="ruby-identifier">format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'text'</span> )
+
+<span class="ruby-comment"># &lt;rpc&gt;</span>
+<span class="ruby-comment">#    &lt;get-chassis-inventory format='text'/&gt;</span>
+<span class="ruby-comment"># &lt;/rpc&gt;</span>
+</pre>
+
+<h3 id="label-Retrieving+Configuration%3A">Retrieving Configuration:</h3>
+
+<p>To retrieve configuration from a device, use the
+<strong>get-config</strong> RPC.  Here is an example, but you can find
+others in the <strong>examples</strong> directory:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'net/netconf'</span>
+
+<span class="ruby-identifier">login</span> = { :<span class="ruby-identifier">target</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'vsrx'</span>, :<span class="ruby-identifier">username</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;jeremy&quot;</span>, :<span class="ruby-identifier">password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;jeremy1&quot;</span> }
+
+<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Connecting to device: #{login[:target]}&quot;</span> 
+
+<span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">SSH</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">login</span> ){ <span class="ruby-operator">|</span><span class="ruby-identifier">dev</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Connected.&quot;</span>
+
+  <span class="ruby-comment"># ----------------------------------------------------------------------  </span>
+  <span class="ruby-comment"># retrieve the full config.  Default source is 'running'</span>
+  <span class="ruby-comment"># Alternatively you can pass the source name as a string parameter </span>
+  <span class="ruby-comment"># to #get_config</span>
+
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Retrieving full config, please wait ... &quot;</span>
+  <span class="ruby-identifier">cfgall</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_config</span>                   
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Showing 'system' hierarchy ...&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">cfgall</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'configuration/system'</span>)     <span class="ruby-comment"># JUNOS toplevel config element is &lt;configuration&gt; </span>
+
+  <span class="ruby-comment"># ----------------------------------------------------------------------  </span>
+  <span class="ruby-comment"># specifying a filter as a block to get_config</span>
+
+  <span class="ruby-identifier">cfgsvc1</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_config</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">configuration</span> { <span class="ruby-identifier">x</span>.<span class="ruby-identifier">system</span> { <span class="ruby-identifier">x</span>.<span class="ruby-identifier">services</span> }}
+  }
+
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Retrieved services as BLOCK:&quot;</span>
+  <span class="ruby-identifier">cfgsvc1</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//services/*'</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">name</span> }
+
+  <span class="ruby-comment"># ----------------------------------------------------------------------</span>
+  <span class="ruby-comment"># specifying a filter as a parameter to get_config</span>
+
+  <span class="ruby-identifier">filter</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">configuration</span> { <span class="ruby-identifier">x</span>.<span class="ruby-identifier">system</span> { <span class="ruby-identifier">x</span>.<span class="ruby-identifier">services</span> }}
+  }
+
+  <span class="ruby-identifier">cfgsvc2</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_config</span>( <span class="ruby-identifier">filter</span> )
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Retrieved services as PARAM:&quot;</span>  
+  <span class="ruby-identifier">cfgsvc2</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//services/*'</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">name</span> }
+
+  <span class="ruby-identifier">cfgsvc3</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">get_config</span>( <span class="ruby-identifier">filter</span> )
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Retrieved services as PARAM, re-used filter&quot;</span>  
+  <span class="ruby-identifier">cfgsvc3</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//services/*'</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">name</span> }        
+}
+</pre>
+
+<p><strong><em>NOTE</em></strong>: There is a JUNOS RPC,
+<strong>get-configuration</strong>, that provides Juniper specific
+extensions as well.</p>
+
+<h3 id="label-Changing+Configuration%3A">Changing Configuration:</h3>
+
+<p>To retrieve configuration from a device, use the
+<strong>edit-config</strong> RPC.  Here is an example, but you can find
+others in the <strong>examples</strong> directory:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'net/netconf'</span>
+
+<span class="ruby-identifier">login</span> = { :<span class="ruby-identifier">target</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'vsrx'</span>, :<span class="ruby-identifier">username</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;jeremy&quot;</span>, :<span class="ruby-identifier">password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;jeremy1&quot;</span> }
+
+<span class="ruby-identifier">new_host_name</span> = <span class="ruby-string">&quot;vsrx-abc&quot;</span>
+
+<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Connecting to device: #{login[:target]}&quot;</span> 
+
+<span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">SSH</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">login</span> ){ <span class="ruby-operator">|</span><span class="ruby-identifier">dev</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Connected!&quot;</span>
+
+  <span class="ruby-identifier">target</span> = <span class="ruby-string">'candidate'</span>
+
+  <span class="ruby-comment"># JUNOS toplevel element is 'configuration'</span>
+
+  <span class="ruby-identifier">location</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">configuration</span> {
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">system</span> {
+      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">location</span> {
+        <span class="ruby-identifier">x</span>.<span class="ruby-identifier">building</span> <span class="ruby-string">&quot;Main Campus, A&quot;</span>
+        <span class="ruby-identifier">x</span>.<span class="ruby-identifier">floor</span> <span class="ruby-value">5</span>
+        <span class="ruby-identifier">x</span>.<span class="ruby-identifier">rack</span> <span class="ruby-value">27</span>
+      }
+    }
+  }}
+
+  <span class="ruby-keyword">begin</span>
+
+    <span class="ruby-identifier">rsp</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">lock</span> <span class="ruby-identifier">target</span>
+
+    <span class="ruby-comment"># --------------------------------------------------------------------    </span>
+    <span class="ruby-comment"># configuration as BLOCK</span>
+
+    <span class="ruby-identifier">rsp</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">edit_config</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">configuration</span> {
+      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">system</span> {
+        <span class="ruby-identifier">x</span>.<span class="ruby-identifier">send</span>(:<span class="ruby-string">'host-name'</span>, <span class="ruby-identifier">new_host_name</span> )
+      }
+    }}
+
+    <span class="ruby-comment"># --------------------------------------------------------------------</span>
+    <span class="ruby-comment"># configuration as PARAM</span>
+
+    <span class="ruby-identifier">rsp</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">edit_config</span>( <span class="ruby-identifier">location</span> )
+
+    <span class="ruby-identifier">rsp</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">validate</span> <span class="ruby-identifier">target</span>
+    <span class="ruby-identifier">rpc</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">commit</span>
+    <span class="ruby-identifier">rpc</span> = <span class="ruby-identifier">dev</span>.<span class="ruby-identifier">rpc</span>.<span class="ruby-identifier">unlock</span> <span class="ruby-identifier">target</span>
+
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">LockError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Lock error&quot;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">EditError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Edit error&quot;</span>          
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">ValidateError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Validate error&quot;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">CommitError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Commit error&quot;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Netconf</span><span class="ruby-operator">::</span><span class="ruby-constant">RpcError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;General RPC error&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Configuration Committed.&quot;</span>
+  <span class="ruby-keyword">end</span>  
+}
+</pre>
+
+<p><strong><em>NOTE</em></strong>: There is a JUNOS RPC,
+<strong>load-configuration</strong>, that provides Juniper specific
+extensions as well.</p>
+
+<h2 id="label-LICENSE%3A">LICENSE:</h2>
+
+<p>(BSD 2)</p>
+
+<p>Copyright © 2013, Juniper Networks</p>
+
+<p>All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+
+<p>(1) Redistributions of source code must retain the above copyright notice,
+this  list of conditions and the following disclaimer.</p>
+
+<p>(2) Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.</p>
+
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS”
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.</p>
+
+<p>The views and conclusions contained in the software and documentation are
+those of the authors and should not be interpreted as representing official
+policies,  either expressed or implied, of Juniper Networks.</p>
+
+<h2 id="label-AUTHORS+AND+CONTRIBUTORS%3A">AUTHORS AND CONTRIBUTORS:</h2>
+<ul><li>
+<p><a href="http://www.linkedin.com/in/jeremyschulman">Jeremy Schulman</a>,
+Juniper Networks</p>
+</li><li>
+<p>Ankit Jain, Juniper Networks</p>
+</li></ul>
+
+</div>
+
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
