@@ -64,7 +64,12 @@ module Netconf
     def trans_send( cmd_str )
       @trans[:chan].send_data( cmd_str )                    
     end
-
+    
+    # accessor to create an Net::SCP object so the caller can perform
+    # secure-copy operations (see Net::SCP) for details
+    def scp
+      @scp ||= Net::SCP.start( @args[:target], @args[:username], :password => @args[:password] )
+    end
     
   end # class: SSH
 end #module: Netconf
