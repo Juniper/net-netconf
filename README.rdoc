@@ -1,4 +1,4 @@
-= Net::Netconf
+= Netconf
 
 * http://github.com/Juniper-Workflow/net-netconf
 
