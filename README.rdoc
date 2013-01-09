@@ -76,11 +76,7 @@ Alternative explicity open, execute RPCs, and close
 
 == INSTALL:
 
-The Netconf module is not yet posted on RubyForge, but will be in the near future.  
-
-For now, download the netconf gem file from {github}[http://github.com/Juniper-Workflow/net-netconf], and:
-
-* gem install netconf-<_version_>.gem
+* gem install netconf
 
 == USING NETCONF:
 
