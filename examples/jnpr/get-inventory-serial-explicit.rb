@@ -22,8 +22,6 @@ dev.open { |con|
 
 inv = dev.rpc.get_chassis_inventory
 
-binding.pry
-
 dev.close
 
 

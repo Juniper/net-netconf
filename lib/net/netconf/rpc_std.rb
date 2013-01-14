@@ -5,15 +5,12 @@ module Netconf
     MSG_END_RE = /\]\]>\]\]>[\r\n]*$/
     MSG_CLOSE_SESSION = '<rpc><close-session/></rpc>'       
     MSG_HELLO = <<-EOM
-<hello>
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
   <capabilities>
-    <capability>urn:ietf:params:xml:ns:netconf:base:1.0</capability>
-    <capability>urn:ietf:params:xml:ns:netconf:base:1.0#candidate</capability>
-    <capability>urn:ietf:params:xml:ns:netconf:base:1.0#confirmed-commit</capability>
-    <capability>urn:ietf:params:xml:ns:netconf:base:1.0#validate</capability>
-    <capability>urn:ietf:params:xml:ns:netconf:base:1.0#url?protocol=http,ftp,file</capability>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
   </capabilities>
-</hello>    
+</hello>
+]]>]]>
 EOM
 
   module Standard

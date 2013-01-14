@@ -1,6 +1,6 @@
 require 'net/netconf/jnpr'
 
-puts "NETCONF v.#{Netconf::VERSION}"
+puts "NETCONF v#{Netconf::VERSION}"
 
 login = { :target => 'vsrx', :username => "jeremy", :password => "jeremy1" }
   
@@ -14,9 +14,9 @@ Netconf::SSH.new( login ){ |dev|
   location = Nokogiri::XML::Builder.new{ |x| 
     x.system {
       x.location {
-        x.building "Main Campus, C"
-        x.floor 15
-        x.rack 37
+        x.building "Main Campus, D"
+        x.floor 22
+        x.rack 38
       }
     }
   }
@@ -52,7 +52,6 @@ Netconf::SSH.new( login ){ |dev|
     puts "Commit error"
   rescue Netconf::RpcError => e
     puts "General RPC error"
-    binding.pry
   else
     puts "Configuration Committed."
   end  

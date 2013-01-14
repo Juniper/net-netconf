@@ -55,7 +55,6 @@ Netconf::SSH.new( login ){ |dev|
     puts "Commit error"
   rescue Netconf::RpcError => e
     puts "General RPC error"
-    binding.pry
   else
     puts "Configuration Committed."
   end  

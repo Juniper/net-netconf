@@ -1,7 +1,7 @@
 require 'net/netconf'
 require 'net/scp'
 
-login = { :target => 'vsrx', :username => "jeremy" }
+login = { :target => 'vsrx', :username => "jeremy", :password => "jeremy1" }
 
 file_name = __FILE__  
 

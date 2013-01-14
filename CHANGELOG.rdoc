@@ -1,0 +1,17 @@
+= CHANGE LOG
+---
+* 0.2.0, 2012-Jan-06
+  * First release
+  * Support for SSH, Telnet, and Console
+  * Tested against JUNOS devices
+---
+* 0.2.1, 2012-Jan-09
+  * added support for Net::SCP accessor in SSH transport.  See example code "scp.rb";
+    you will need to explicity require 'net/scp' in your top-level code
+--- 
+* 0.2.2, 2012-Jan-14
+  * added RFC required <rpc> namespace and message-id attributes
+  * Tested against Tail-F "confD" server
+    
+    
+

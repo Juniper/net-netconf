@@ -33,13 +33,7 @@ module Netconf
       trans_start_netconf() 
       self
     end
-    
-    def trans_hello
-      hello_str = trans_receive()
-      so_xml = hello_str.index("\n") + 1      # skip over the last issued command      
-      hello_str[so_xml .. -1]
-    end
-    
+        
     def trans_close
       @trans.write Netconf::RPC::MSG_CLOSE_SESSION
       @trans.close

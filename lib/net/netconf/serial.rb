@@ -68,11 +68,15 @@ module Netconf
       self
     end
     
-    def trans_hello
+    def trans_receive_hello
       hello_str = trans_receive()
       so_xml = hello_str.index("\n") + 1
       hello_str.slice!(0, so_xml)
       hello_str
+    end
+    
+    def trans_send_hello
+      nil
     end
     
     def trans_close
@@ -115,7 +119,10 @@ module Netconf
       
         begin                   
           
-          rx_some = @trans.readpartial( DEFAULT_RDBLKSZ )                         
+          rx_some = @trans.readpartial( DEFAULT_RDBLKSZ )                       
+          
+          $stdout.puts rx_some
+          
           rx_buf += rx_some
           break if rx_buf.match( on_re )
           

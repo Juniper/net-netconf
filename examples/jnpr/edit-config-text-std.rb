@@ -59,7 +59,6 @@ EOCONF
     puts "Commit error"
   rescue Netconf::RpcError => e
     puts "General RPC error"
-    binding.pry
   else
     puts "Configuration Committed."
   end  

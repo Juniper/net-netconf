@@ -22,6 +22,7 @@ module Netconf
       @os_type = @args[:os_type] || Netconf::DEFAULT_OS_TYPE
             
       @rpc = Netconf::RPC::Executor.new( self, @os_type )
+      @rpc_message_id = 1
       
       if block_given?
         open( &block = nil )      # do not pass this block to open()
@@ -38,17 +39,29 @@ module Netconf
       # block is used to deal with special open processing ...
       # this is *NOT* the block passed to initialize()
       raise Netconf::OpenError unless trans_open( &block )      
-      @state = :NETCONF_OPEN            
+            
+      # read the <hello> from the server and parse out
+      # the capabilities and session-id
       
-      hello_rsp = Nokogiri::XML( trans_hello() )
-      
+      hello_rsp = Nokogiri::XML( trans_receive_hello() )
+      hello_rsp.remove_namespaces!
+            
       @capabilities = hello_rsp.xpath('//capability').map{ |c| c.text }
-      @session_id = hello_rsp.xpath('//session-id').text            
+      @session_id = hello_rsp.xpath('//session-id').text
+            
+      # send the <hello> 
+      trans_send_hello()
+      
+      @state = :NETCONF_OPEN            
       self      
     end
     
-    def trans_hello
+    def trans_receive_hello
       trans_receive()
+    end
+    
+    def trans_send_hello
+      trans_send( Netconf::RPC::MSG_HELLO )
     end
     
     def has_capability?( capability )
@@ -71,7 +84,14 @@ module Netconf
     
     def rpc_exec( cmd_nx )
       raise Netconf::StateError unless @state == :NETCONF_OPEN         
-
+      
+      # add the mandatory message-id and namespace to the RPC
+      
+      rpc_nx = cmd_nx.parent.root
+      rpc_nx.default_namespace = Netconf::NAMESPACE
+      rpc_nx['message-id'] = @rpc_message_id.to_s
+      @rpc_message_id += 1
+      
       # send the XML command through the transport and 
       # receive the response; then covert it to a Nokogiri XML
       # object so we can process it.
