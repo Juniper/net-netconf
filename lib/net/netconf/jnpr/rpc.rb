@@ -127,7 +127,13 @@ module Netconf
         
         Netconf::RPC::set_exception( rpc, Netconf::EditError )    
         @trans.rpc_exec( rpc )
-      end      
+      end # load_configuration
+      
+      def command( cmd_str, attrs = nil )
+        rpc = Nokogiri::XML("<rpc><command>#{cmd_str}</command></rpc>").root
+        Netconf::RPC.add_attributes( rpc.at('command'), attrs ) if attrs           
+        @trans.rpc_exec( rpc )
+      end
             
     end # module: JUNOS    
   end # module: RPC
