@@ -2,21 +2,32 @@ require 'net/netconf/jnpr'
 
 puts "NETCONF v#{Netconf::VERSION}"
 
-login = { :target => 'vsrx', :username => "jeremy", :password => "jeremy1" }
+login = { :target => 'ex4', :username => "jeremy", :password => "jeremy1" }
   
-new_host_name = "vsrx-jjj"
+new_host_name = "ex4-abc"
 
 puts "Connecting to device: #{login[:target]}" 
 
 Netconf::SSH.new( login ){ |dev|
   puts "Connected!"
   
+  # when providing a collection of configuration,
+  # you need to include the <configuration> as the 
+  # toplevel element
+  
   location = Nokogiri::XML::Builder.new{ |x| 
-    x.system {
-      x.location {
-        x.building "Main Campus, D"
-        x.floor 22
-        x.rack 38
+    x.configuration {
+      x.system {
+        x.location {
+          x.building "Main Campus, D"
+          x.floor 22
+          x.rack 38
+        }
+      }
+      x.system {
+        x.services {
+          x.ftp;
+        }
       }
     }
   }
@@ -24,7 +35,12 @@ Netconf::SSH.new( login ){ |dev|
   begin
     
     rsp = dev.rpc.lock_configuration
-
+    
+    # --------------------------------------------------------------------
+    # configuration as PARAM
+    
+    rsp = dev.rpc.load_configuration( location,  :action => 'replace' )
+    
     # --------------------------------------------------------------------    
     # configuration as BLOCK
     
@@ -34,10 +50,6 @@ Netconf::SSH.new( login ){ |dev|
       }
     }
     
-    # --------------------------------------------------------------------
-    # configuration as PARAM
-    
-    rsp = dev.rpc.load_configuration( location )
     rpc = dev.rpc.check_configuration
     rpc = dev.rpc.commit_configuration
     rpc = dev.rpc.unlock_configuration

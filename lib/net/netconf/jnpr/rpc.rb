@@ -14,7 +14,7 @@
 
 module Netconf
   module RPC
-    module JUNOS            
+    module Junos            
       
       def lock_configuration
         lock( 'candidate' )
@@ -55,9 +55,8 @@ module Netconf
               yield( xml )
           }}
         elsif filter
-          f_node = Nokogiri::XML::Node.new( 'configuration', rpc )
-          f_node << filter.dup                    # *MUST* use the .dup so we don't disrupt the original filter
-          rpc.first_element_child << f_node
+          # filter must have toplevel = <configuration>
+          rpc.first_element_child << filter.dup   # *MUST* use the .dup so we don't disrupt the original filter
         end
                
         @trans.rpc_exec( rpc )
@@ -69,7 +68,7 @@ module Netconf
         
         # default format is XML
         attrs = { :format => 'xml' }
-        
+                
         while arg = args.shift
           case arg.class.to_s
           when /^Nokogiri/ 
@@ -78,7 +77,7 @@ module Netconf
               when Nokogiri::XML::Document then arg.root
               else arg
               end                
-          when 'Hash' then attrs = arg
+          when 'Hash' then attrs.merge! arg
           when 'Array' then config = arg.join("\n")
           when 'String' then config = arg
           end
@@ -93,8 +92,8 @@ module Netconf
           toplevel = 'configuration-text'          
         when 'xml'
           toplevel = 'configuration'          
-        end
-                        
+        end                        
+        
         rpc = Nokogiri::XML('<rpc><load-configuration/></rpc>').root
         ld_cfg = rpc.first_element_child
         Netconf::RPC.add_attributes( ld_cfg, attrs ) if attrs   
@@ -112,14 +111,15 @@ module Netconf
         end
         
         if config
-          c_node = Nokogiri::XML::Node.new( toplevel, rpc )
           if attrs[:format] == 'xml'
-            c_node << config.dup        # duplicate the config so as to not distrupt it            
+            # config assumes toplevel = <configuration> given            
+            ld_cfg << config.dup        # duplicate the config so as to not distrupt it            
           else
-            # config is stringy, so just add it as the text node
+            # config is stringy, so just add it as the text node            
+            c_node = Nokogiri::XML::Node.new( toplevel, rpc )            
             c_node.content = config
+            ld_cfg << c_node            
           end
-          ld_cfg << c_node
         end
                                            
         # set a specific exception class on this RPC so it can be

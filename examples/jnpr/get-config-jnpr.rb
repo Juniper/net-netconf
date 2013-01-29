@@ -2,7 +2,7 @@ require 'net/netconf/jnpr'      # note: including Juniper specific extension
 
 puts "NETCONF v.#{Netconf::VERSION}"
 
-login = { :target => 'vsrx', :username => "jeremy", :password => "jeremy1" }
+login = { :target => 'ex4', :username => "jeremy", :password => "jeremy1" }
   
 puts "Connecting to device: #{login[:target]}" 
 
@@ -22,6 +22,7 @@ Netconf::SSH.new( login ){ |dev|
   
   cfgsvc1_1 = dev.rpc.get_configuration{ |x|
     x.system { x.services }
+    x.system { x.login }
   }
   
   cfgsvc1_1.xpath('system/services/*').each{|s| puts s.name }
@@ -36,10 +37,12 @@ Netconf::SSH.new( login ){ |dev|
   
   # ----------------------------------------------------------------------
   # specifying a filter as a parameter to get_configuration
+  # you must wrap the config in a toplevel <configuration> element
   
-  filter = Nokogiri::XML::Builder.new{ |x|
+  filter = Nokogiri::XML::Builder.new{ |x| x.configuration {
     x.system { x.services }
-  }
+    x.system { x.login }
+  }}
 
   puts "Retrieved services by PARAM, as XML"  
   
