@@ -19,7 +19,7 @@ module Netconf
     end
     
     def to_s
-      "RPC command error: #{cmd.first_element_child.name}"
+      "RPC command error: #{cmd.first_element_child.name}\n#{rsp.to_xml}"
     end
   end
   
