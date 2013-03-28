@@ -20,3 +20,6 @@
   * Refactored code to enhance multi-vendor
   * Fixed Junos specific RPCs
   * Added IOProc support
+---
+* 0.2.6, 2013-Mar-05
+  * Updated exception handling to include more useful error messaging
