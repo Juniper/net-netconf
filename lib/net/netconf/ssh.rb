@@ -13,6 +13,20 @@ module Netconf
       super( &block )
     end
     
+    # This opens the underlying Net::SSH transport object.
+    # Options that are valid to Net::SSH#start can be passed here in the
+    # +start_args+ option hash.  Some Net::SSH#start documentation can be found
+    # here:
+    # http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
+    #
+    # Example of jumping SSHing through an intermediary host:
+    #
+    #   jump_host = Net::SSH::Proxy::Command.new('ssh admin_host.ops.colo.example.com nc %h %p')
+    #   netconf = Netconf::SSH.new(:target => 'fxp0.firewall1.colo.example.com', :username => 'root', :port => 22)
+    #   netconf.trans_open(:proxy => jump_host)
+    #   netconf.open
+    #   netconf.rpc.get_chassis_inventory
+    #   ......
     def trans_open( start_args = {}, &block )
       # open a connection to the NETCONF subsystem
       start_args[:password] ||= @args[:password]
