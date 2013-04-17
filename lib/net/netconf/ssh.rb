@@ -13,9 +13,8 @@ module Netconf
       super( &block )
     end
     
-    def trans_open( &block )
-      # open a connection to the NETCONF subsystem        
-      start_args = Hash.new
+    def trans_open( start_args = {}, &block )
+      # open a connection to the NETCONF subsystem
       start_args[:password] ||= @args[:password]
       start_args[:passphrase] = @args[:passphrase] || nil
       start_args[:port] = @args[:port] || NETCONF_PORT
