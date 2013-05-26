@@ -55,6 +55,10 @@ module Netconf
       @state = :NETCONF_OPEN            
       self      
     end
+
+    def open?
+      @state == :NETCONF_OPEN
+    end
     
     def trans_receive_hello
       trans_receive()
