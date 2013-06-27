@@ -40,6 +40,7 @@ module Netconf
     
     def trans_send( cmd_str )
       @trans.write( cmd_str )
+      @trans.write( Netconf::RPC::MSG_END )
     end
     
     def trans_receive
