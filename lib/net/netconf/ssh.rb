@@ -1,4 +1,5 @@
 require 'net/ssh'
+require 'net/netconf/transport'
 
 module Netconf      
   class SSH < Netconf::Transport
