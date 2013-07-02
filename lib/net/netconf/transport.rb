@@ -118,7 +118,7 @@ module Netconf
       # the <rpc-error> could either be at the toplevel or 
       # as a child element of toplevel. 
       
-      if rsp_nx.xpath( "rpc-error|*/rpc-error" )[0]     
+      if rsp_nx.xpath( "rpc-error|*/rpc-error" )[0] or rsp_nx.xpath("error|*/error")[0]
         exception = Netconf::RPC.get_exception( cmd_nx )       
         raise exception.new( self, cmd_nx, rsp_nx )        
       end        
