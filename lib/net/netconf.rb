@@ -1,13 +1,13 @@
 
 require 'nokogiri'
 
+require 'net/netconf/version'
 require 'net/netconf/rpc'
 require 'net/netconf/exception'         
 require 'net/netconf/transport'
 require 'net/netconf/ssh'
 
 module Netconf  
-  VERSION = "0.3.0"   
   NAMESPACE = "urn:ietf:params:xml:ns:netconf:base:1.0"  
   DEFAULT_OS_TYPE = :Junos  
   DEFAULT_TIMEOUT = 10
