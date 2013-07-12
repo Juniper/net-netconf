@@ -111,12 +111,26 @@ module Netconf
       
       rsp_nx = rsp_nx.root
             
-      # the <rpc-error> could either be at the toplevel or 
-      # as a child element of toplevel. 
+      # check for rpc-error elements.  these could be
+      # located anywhere in the structured response
       
-      if rsp_nx.xpath( "rpc-error|*/rpc-error" )[0]     
-        exception = Netconf::RPC.get_exception( cmd_nx )       
-        raise exception.new( self, cmd_nx, rsp_nx )        
+      rpc_errs = rsp_nx.xpath('//self::rpc-error')
+      if rpc_errs.count > 0
+        
+        # look for rpc-errors that have a severity == 'error'
+        # in some cases the rpc-error is generated with
+        # severity == 'warning'
+        
+        sev_err = rpc_errs.xpath('error-severity[. = "error"]')
+        
+        # if there are rpc-error with severity == 'error'
+        # or if the caller wants to raise if severity == 'warning'
+        # then generate the exception
+        
+        if(( sev_err.count > 0 ) || Netconf::raise_on_warning )
+          exception = Netconf::RPC.get_exception( cmd_nx )       
+          raise exception.new( self, cmd_nx, rsp_nx )
+        end        
       end        
       
       # return the XML with context at toplevel element; i.e.

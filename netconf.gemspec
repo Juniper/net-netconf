@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = Netconf::VERSION
   s.summary = "NETCONF client"
   s.description = "Extensible Ruby-based NETCONF client"
-  s.homepage = 'https://github.com/Juniper-Workflow/net-netconf'
+  s.homepage = 'https://github.com/jeremyschulman/net-netconf'
   s.authors = ["Jeremy Schulman", "Ankit Jain"]
   s.email = 'jschulman@juniper.net'
   s.files = FileList['lib/net/**/*.rb', 'examples/**/*.rb']
