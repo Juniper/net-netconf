@@ -1,5 +1,4 @@
 $LOAD_PATH.unshift 'lib'
-require 'rake'
 require 'net/netconf'
 
 Gem::Specification.new do |s|
