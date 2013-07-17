@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = 'jschulman@juniper.net'
 
   s.files         = `git ls-files`.split $/
-  s.test_files    = gem.files.grep /^test/
+  s.test_files    = s.files.grep /^test/
   s.require_paths = ["lib"]
 
   s.add_dependency('nokogiri', '>= 1.5.5')
