@@ -19,6 +19,7 @@ module Netconf
       start_args[:password] ||= @args[:password]
       start_args[:passphrase] = @args[:passphrase] || nil
       start_args[:port] = @args[:port] || NETCONF_PORT
+      start_args.merge!(@args[:ssh_args]) if @args[:ssh_args]
       
       @trans[:conn] = Net::SSH.start( @args[:target], @args[:username], start_args )     
       @trans[:chan] = @trans[:conn].open_channel{ |ch| ch.subsystem( NETCONF_SUBSYSTEM ) }      
