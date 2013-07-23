@@ -22,9 +22,8 @@
   * Added IOProc support
 ---
 * 0.3.0, 2013-Jul-21
-    A number of pull requests were manually merged as a result of my learning curve around git.  My sincere apologies,
-    on the delay bringing these updates into the mainline.  If I missed you on this list, please let me know and I'll
-    update accordingly.  Thx, Jeremy
+
+  A number of pull requests were manually merged as a result of my learning curve around git.  My sincere apologies, on the delay bringing these updates into the mainline.  If I missed you on this list, please let me know and I'll update accordingly.  Thx, Jeremy
     
   * Added Netconf::RPC::MSG_END on each RPC
     kudos: wpaulson
