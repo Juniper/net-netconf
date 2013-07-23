@@ -63,7 +63,7 @@ module Netconf
     end
     
     def trans_send( cmd_str )
-      @trans[:chan].send_data( cmd_str )                    
+      @trans[:chan].send_data( cmd_str )  
     end
     
     # accessor to create an Net::SCP object so the caller can perform

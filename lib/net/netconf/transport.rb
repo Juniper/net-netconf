@@ -32,6 +32,14 @@ module Netconf
       
     end # initialize
     
+    def open?
+      @state == :NETCONF_OPEN
+    end
+    
+    def closed?
+      @state == :NECONF_CLOSED
+    end
+    
     def open( &block ) # :yield: specialized transport open, generally not used
       
       raise Netconf::StateError if @state == :NETCONF_OPEN
@@ -79,6 +87,7 @@ module Netconf
     # string in; string out
     def send_and_receive( cmd_str )
       trans_send( cmd_str )
+      trans_send( RPC::MSG_END )
       trans_receive()
     end
     
