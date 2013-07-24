@@ -1,6 +1,6 @@
 = NETCONF
 
-* http://github.com/Juniper-Workflow/net-netconf
+* http://github.com/Juniper/net-netconf
 
 == DESCRIPTION:
 

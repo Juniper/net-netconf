@@ -19,6 +19,7 @@ module Netconf
       start_args[:password] ||= @args[:password]
       start_args[:passphrase] = @args[:passphrase] || nil
       start_args[:port] = @args[:port] || NETCONF_PORT
+      start_args.merge!(@args[:ssh_args]) if @args[:ssh_args]
       
       @trans[:conn] = Net::SSH.start( @args[:target], @args[:username], start_args )     
       @trans[:chan] = @trans[:conn].open_channel{ |ch| ch.subsystem( NETCONF_SUBSYSTEM ) }      
@@ -62,7 +63,7 @@ module Netconf
     end
     
     def trans_send( cmd_str )
-      @trans[:chan].send_data( cmd_str )                    
+      @trans[:chan].send_data( cmd_str )  
     end
     
     # accessor to create an Net::SCP object so the caller can perform

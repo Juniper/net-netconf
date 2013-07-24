@@ -134,6 +134,28 @@ module Netconf
         Netconf::RPC.add_attributes( rpc.at('command'), attrs ) if attrs           
         @trans.rpc_exec( rpc )
       end
+      
+      ## contributed by 'dgjnpr'
+      def request_pfe_execute( params = nil )
+        raise ArgumentError, 'Manditorary argument :target missing' unless params[:target]
+        raise ArgumentError, 'Manditorary argument :command missing' unless params[:command]
+
+        rpc_nx = Nokogiri::XML::Builder.new { |xml|
+          xml.rpc {
+            xml.send( 'request-pfe-execute' ) {
+              xml.send( 'target', params[:target] )
+              if params[:command].class.to_s =~ /^Array/
+                params[:command].each { |cmd|
+                  xml.send( 'command', cmd )
+                }
+              elsif params[:command].class.to_s =~ /^String/
+                xml.send( 'command', params[:command] )
+              end
+            }
+          }
+        }
+        @trans.rpc_exec( rpc_nx )
+      end
             
     end # module: JUNOS    
   end # module: RPC
