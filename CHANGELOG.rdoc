@@ -56,3 +56,11 @@
   * NOTE: If you intend to use `Netconf::Serial` you will need to ensure that the `serialport` gem is installed.  This gem
     is not explicitly included in the gemspec
 
+---
+* 0.3.1, 2013-Jul-26
+
+  * Added extension support to Netconf::SSH.  For example, see net/netconf/jnpr/ssh.rb.
+  
+  * Added Juniper Netconf::SSH extension to access NETCONF subsystem via CLI command if NETCONF port (830) is not
+    enabled.  This enhancement was added for users that have Junos systems depoloyed, but didn't enable NETCONF.  Note
+    that this enhacement assumes that the user login starts at the standard Junos CLI (i.e. not root user)
