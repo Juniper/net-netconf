@@ -28,6 +28,9 @@
   * Added Netconf::RPC::MSG_END on each RPC
     kudos: wpaulson
     
+  * Added Juniper specific request_pfe_execute
+    kudos: dgjnpr
+  
   * Added `:ssh_args` hash on Netconf::SSH to support any of the Net::SSH start args 
     kudos: imbracio
     
