@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
   s.files = FileList['lib/net/**/*.rb', 'examples/**/*.rb']
   s.add_dependency('nokogiri', '>= 1.5.5')
   s.add_dependency('net-ssh', '>= 2.5.2')
-  s.add_dependency('net-scp', '>= 1.1.1')
+  s.add_dependency('net-scp')
 end
