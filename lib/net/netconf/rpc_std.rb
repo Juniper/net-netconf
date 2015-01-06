@@ -9,7 +9,7 @@ module Netconf
   <capabilities>
     <capability>urn:ietf:params:netconf:base:1.0</capability>
   </capabilities>
-</hello>
+</hello>]]>]]>
 EOM
 
   module Standard
