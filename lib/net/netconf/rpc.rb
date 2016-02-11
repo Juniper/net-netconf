@@ -1,4 +1,5 @@
 require 'net/netconf/rpc_std'
+require 'net/netconf/jnpr/rpc'
 
 module Netconf  
   module RPC    
