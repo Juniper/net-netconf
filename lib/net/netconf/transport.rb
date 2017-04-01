@@ -105,7 +105,7 @@ module Netconf
       # receive the response; then covert it to a Nokogiri XML
       # object so we can process it.
       
-      rsp_nx = Nokogiri::XML( send_and_receive( cmd_nx.to_xml ))
+      rsp_nx = Nokogiri::XML( send_and_receive( cmd_nx.parent.to_xml ))
       
       # the following removes only the default namespace (xmlns)
       # definitions from the document.  This is an alternative
