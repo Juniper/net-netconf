@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Netconf
-  # some comment
   class IOProc < Netconf::Transport
     DEFAULT_RDBLKSZ = (1024 * 1024)
 
