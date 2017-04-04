@@ -2,18 +2,23 @@ require 'net/netconf'
 
 puts "NETCONF v.#{Netconf::VERSION}"
 
-login = { :target => 'vsrx', :username => "jeremy", :password => "jeremy1" }
-  
-new_host_name = "vsrx"
+login = {
+  target: 'vsrx',
+  username: 'jeremy',
+  password: 'jeremy1'
+}
 
-puts "Connecting to device: #{login[:target]}" 
+new_host_name = 'vsrx'
 
-Netconf::SSH.new( login ){ |dev|
-  puts "Connected!"
-  
+puts "Connecting to device: #{login[:target]}"
+
+Netconf::SSH.new(login) do |dev|
+  puts 'Connected!'
+
   target = 'candidate'
-  
-  location = Nokogiri::XML::Builder.new{ |x| x.send(:'configuration-text', <<-EOCONF
+
+  location = Nokogiri::XML::Builder.new do |x|
+    x.send(:'configuration-text', <<-EOCONF
     system {
       location {
         building "Main Campus, ABC123"
@@ -22,47 +27,40 @@ Netconf::SSH.new( login ){ |dev|
       }
     }
 EOCONF
-  )}
-  
-  
-  begin
-    
-    rsp = dev.rpc.lock target
+    )
+  end
 
-    # --------------------------------------------------------------------    
+  begin
+    dev.rpc.lock target
+
+    # --------------------------------------------------------------------
     # configuration as BLOCK
-    
-    rsp = dev.rpc.edit_config(:toplevel => 'config-text'){ 
-      |x| x.send(:'configuration-text', <<EOCONF
+    dev.rpc.edit_config(toplevel: 'config-text') do |x|
+      x.send(:'configuration-text', <<EOCONF
       system {
         host-name #{new_host_name};
       }
 EOCONF
-    )}
-    
+      )
+    end
     # --------------------------------------------------------------------
     # configuration as PARAM
-    
-    rsp = dev.rpc.edit_config( location, :toplevel => 'config-text' )
-    
-    rsp = dev.rpc.validate target
-    rpc = dev.rpc.commit
-    rpc = dev.rpc.unlock target
-    
-  rescue Netconf::LockError => e
-    puts "Lock error"
-  rescue Netconf::EditError => e
-    puts "Edit error"    
-  rescue Netconf::ValidateError => e
-    puts "Validate error"
-  rescue Netconf::CommitError => e
-    puts "Commit error"
-  rescue Netconf::RpcError => e
-    puts "General RPC error"
+    dev.rpc.edit_config(location, toplevel: 'config-text')
+
+    dev.rpc.validate target
+    dev.rpc.commit
+    dev.rpc.unlock target
+  rescue Netconf::LockError
+    puts 'Lock error'
+  rescue Netconf::EditError
+    puts 'Edit error'
+  rescue Netconf::ValidateError
+    puts 'Validate error'
+  rescue Netconf::CommitError
+    puts 'Commit error'
+  rescue Netconf::RpcError
+    puts 'General RPC error'
   else
-    puts "Configuration Committed."
-  end  
-}
-
-
-
+    puts 'Configuration Committed.'
+  end
+end
