@@ -70,6 +70,7 @@ module Netconf
     
     def trans_send_hello
       trans_send( Netconf::RPC::MSG_HELLO )
+      trans_send( RPC::MSG_END )
     end
     
     def has_capability?( capability )
