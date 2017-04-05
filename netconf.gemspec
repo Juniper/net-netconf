@@ -4,6 +4,7 @@ require 'net/netconf/version'
 
 Gem::Specification.new do |s|
   s.name = 'netconf'
+  s.licenses = ['JSSL']
   s.version = Netconf::VERSION
   s.summary = "NETCONF client"
   s.description = "Extensible Ruby-based NETCONF client with native support for Junos. Maintained by Juniper Networks"
