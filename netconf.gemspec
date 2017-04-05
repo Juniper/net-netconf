@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('net-ssh', '~> 4.1')
   s.add_runtime_dependency('net-scp', '~> 1.2')
   s.add_development_dependency('rake', '~> 12.0')
+  s.add_development_dependency('simplecov', '~> 0.14')
+  s.add_development_dependency('codeclimate-test-reporter', '~> 1.0')
   # s.add_development_dependency('rspec-core', '~> 3.5')
   # s.add_development_dependency('rspec-expectations', '~> 3.5')
   s.add_development_dependency('cucumber', '~> 2.4')
