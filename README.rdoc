@@ -3,6 +3,7 @@
 {<img src="https://travis-ci.org/Juniper/net-netconf.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/Juniper/net-netconf]
 {<img src="https://codeclimate.com/github/Juniper/net-netconf/badges/gpa.svg" />}[https://codeclimate.com/github/Juniper/net-netconf]
 {<img src="https://codeclimate.com/github/Juniper/net-netconf/badges/coverage.svg" />}[https://codeclimate.com/github/Juniper/net-netconf/coverage]
+{<img src="https://travis-ci.org/Juniper/net-netconf.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/Juniper/net-netconf]
 
 = NETCONF
 
