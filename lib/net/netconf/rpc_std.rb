@@ -5,11 +5,13 @@ module Netconf
     MSG_END_RE = /\]\]>\]\]>[\r\n]*$/
     MSG_CLOSE_SESSION = '<rpc><close-session/></rpc>'       
     MSG_HELLO = <<-EOM
+<?xml version="1.0"?>
 <hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
   <capabilities>
     <capability>urn:ietf:params:netconf:base:1.0</capability>
   </capabilities>
 </hello>
+]]>]]>
 EOM
 
   module Standard
