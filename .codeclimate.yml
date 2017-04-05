@@ -1,0 +1,11 @@
+engines:
+  rubocop:
+    enabled: true
+  exclude_paths:
+    - spec/**/*
+    - features/**/*
+    - gems/*
+  ratings:
+    paths:
+       - lib/**
+       - examples/**
