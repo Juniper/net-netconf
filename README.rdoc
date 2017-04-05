@@ -1,3 +1,9 @@
+{<img src="https://badge.fury.io/rb/netconf.svg" alt="Gem Version" />}[https://badge.fury.io/rb/netconf]
+
+{<img src="https://gemnasium.com/badges/github.com/Juniper/net-netconf.svg" alt="Dependency Status" />}[https://gemnasium.com/github.com/Juniper/net-netconf]
+
+{<img src="https://travis-ci.org/Juniper/net-netconf.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/Juniper/net-netconf]
+
 = NETCONF
 
 * http://github.com/Juniper/net-netconf
