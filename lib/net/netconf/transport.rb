@@ -37,7 +37,7 @@ module Netconf
     end
     
     def closed?
-      @state == :NECONF_CLOSED
+      @state == :NETCONF_CLOSED
     end
     
     def open( &block ) # :yield: specialized transport open, generally not used
