@@ -36,7 +36,7 @@ module Netconf
     end
 
     def closed?
-      @state == :NECONF_CLOSED
+      @state == :NETCONF_CLOSED
     end
 
     def open(&block) # :yield: specialized transport open, generally not used
@@ -64,7 +64,8 @@ module Netconf
     end
 
     def trans_send_hello
-      trans_send(Netconf::RPC::MSG_HELLO)
+      trans_send( Netconf::RPC::MSG_HELLO )
+      trans_send( RPC::MSG_END )
     end
 
     def has_capability?(capability)
