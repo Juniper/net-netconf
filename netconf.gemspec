@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/Juniper/net-netconf'
   s.authors = ["Jeremy Schulman", "Ankit Jain"]
   s.email = 'jschulman@juniper.net'
+  s.license = 'BSD 2'
   s.files = FileList['lib/net/**/*.rb', 'examples/**/*.rb']
   s.add_dependency('nokogiri', '>= 1.6.4')
   s.add_dependency('net-ssh', '>= 2.5.2')
