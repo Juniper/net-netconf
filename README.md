@@ -1,38 +1,31 @@
+# Netconf
 [![Gem Version](https://badge.fury.io/rb/netconf.svg)](https://badge.fury.io/rb/netconf)
 [![Dependency Status](https://gemnasium.com/badges/github.com/Juniper/net-netconf.svg)](https://gemnasium.com/github.com/Juniper/net-netconf)
 [![Build Status](https://travis-ci.org/Juniper/net-netconf.svg?branch=master)](https://travis-ci.org/Juniper/net-netconf)
 [![Code Climate](https://codeclimate.com/github/Juniper/net-netconf/badges/gpa.svg)](https://codeclimate.com/github/Juniper/net-netconf)
 [![Test Coverage](https://codeclimate.com/github/Juniper/net-netconf/badges/coverage.svg)](https://codeclimate.com/github/Juniper/net-netconf/coverage)
 
-# Netconf
-
-*   http://github.com/Juniper/net-netconf
-
 ## Description
-
 Device management using the NETCONF protocol as specified in
 [RFC4741](http://tools.ietf.org/html/rfc4741) and
 [RFC6241](http://tools.ietf.org/html/rfc6241).
 
-
 ## Features
+* Extensible protocol transport framework for SSH and non-SSH
+  * SSH transport using [Net::SSH](http://net-ssh.rubyforge.org)
+  * Telnet transport using Net::Telnet (Ruby Library)
+  * Serial transport using [Ruby/SerialPort](http://ruby-serialport.rubyforge.org/)
 
-*   Extensible protocol transport framework for SSH and non-SSH 
-    *   SSH transport using [Net::SSH](http://net-ssh.rubyforge.org)
-    *   Telnet transport using Net::Telnet (Ruby Library)
-    *   Serial transport using
-        [Ruby/SerialPort](http://ruby-serialport.rubyforge.org/)
+* NETCONF Standard RPCs
+  * get-config, edit-config
+  * lock, unlock
+  * validate, discard-changes
 
-*   NETCONF Standard RPCs
-    *   get-config, edit-config
-    *   lock, unlock
-    *   validate, discard-changes
+* Flexible RPC mechanism
+  * Netconf::RPC::Builder to metaprogram RPCs
+  * Vendor extension framework for custom RPCs
 
-*   Flexible RPC mechanism
-    *   Netconf::RPC::Builder to metaprogram RPCs
-    *   Vendor extension framework for custom RPCs
-
-*   XML processing using [Nokogiri](http://nokogiri.org)
+* XML processing using [Nokogiri](http://nokogiri.org)
 
 ## Synopsis
 
@@ -65,7 +58,7 @@ Netconf::SSH.new( login ){ |dev|
 Alternative explicity open, execute RPCs, and close
 
 ```ruby
-require 'net/netconf' 
+require 'net/netconf'
 
 login = { target: 'vsrx', username: 'root', password: 'Amnesiac' }
 
@@ -81,13 +74,8 @@ dev.close
 ```
 
 ## Using Netconf
-
 ### Remote Procedure Calls (RPCs)
-
-Each Netconf session provides a readable instance variable - __rpc__. This is
-used to execute Remote Procedure Calls (RPCs). The @rpc will include the
-NETCONF standard RPCs, any vendor specific extension, as well as the ability 
-to metaprogram new onces via method_missing.
+Each Netconf session provides a readable instance variable - __rpc__. This is used to execute Remote Procedure Calls (RPCs). The @rpc will include the NETCONF standard RPCs, any vendor specific extension, as well as the ability to metaprogram new onces via method_missing.
 
 Here are some examples to illustrate the metaprogamming:
 
@@ -142,8 +130,7 @@ dev.rpc.get_chassis_inventory(nil, format: 'text')
 # </rpc>
 ```
 
-### Retrieving Configuration:
-
+### Retrieving Configuration
 To retrieve configuration from a device, use the `get-config` RPC. Here is
 an example, but you can find others in the __examples__ directory:
 
@@ -152,7 +139,7 @@ require 'net/netconf'
 
 login = { target: 'vsrx', username: 'root', password: 'Amnesia' }
 
-puts "Connecting to device: #{login[:target]}" 
+puts "Connecting to device: #{login[:target]}"
 
 Netconf::SSH.new(login) do |dev|
   puts 'Connected.'
@@ -197,8 +184,7 @@ end
 __NOTE__: There is a JUNOS RPC, `get-configuration`, that provides Juniper
 specific extensions as well.
 
-### Changing Configuration:
-
+### Changing Configuration
 To retrieve configuration from a device, use the `edit-config` RPC. Here is
 an example, but you can find others in the __examples__ directory:
 
@@ -272,9 +258,8 @@ end
 __NOTE__: There is a JUNOS RPC, `load-configuration`, that provides
 Juniper specific extensions as well.
 
-
-## AUTHORS AND CONTRIBUTORS:
-*   [Jeremy Schulman](www.linkedin.com/in/jeremyschulman), Juniper Networks
-*   [Ankit Jain](http://www.linkedin.com/in/ankitj093), Juniper Networks
-*   [Kevin Kirsche](mailto:Kev.Kirsche+GitHub@gmail.com)
-*   [David Gethings](https://www.linkedin.com/in/david-gethings-59a2051/), Juniper Networks
+## Authors and Contributors
+* [Jeremy Schulman](www.linkedin.com/in/jeremyschulman), Juniper Networks
+* [Ankit Jain](http://www.linkedin.com/in/ankitj093), Juniper Networks
+* [Kevin Kirsche](mailto:Kev.Kirsche+GitHub@gmail.com)
+* [David Gethings](https://www.linkedin.com/in/david-gethings-59a2051/), Juniper Networks

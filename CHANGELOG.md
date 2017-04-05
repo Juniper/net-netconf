@@ -28,7 +28,7 @@ NOTE: If you intend to use `Netconf::Serial` you will need to ensure that the `s
 - net-scp to netconf.gemspec dependency. This gem is really only required if you intent to use the SCP functionality; but since this is turning out to be a common use-case, the gem has been added to the dependency list
 
 ### Changed
-- check for rpc-error severity='error` to handle the case where the rpc-error element is actually not an error, but rather severity=warning. If the severity is in fact *not* error, then the Netconf::RpcError *will not* be generated. In Netconf::VERSION <= 0.2.5, the warnings would actually cause an exception. If you would like to maintain the older behavior, then you will need to set `Netconf::raise_on_warning = true`. kudos: jeremyschulman
+- check for rpc-error severity='error' to handle the case where the rpc-error element is actually not an error, but rather severity='warning'. If the severity is in fact __not__ error, then the Netconf::RpcError __will not__ be generated. In Netconf::VERSION <= 0.2.5, the warnings would actually cause an exception. If you would like to maintain the older behavior, then you will need to set `Netconf::raise_on_warning = true`. kudos: jeremyschulman
 - netconf.gemspec to include only the `version.rb` file; also separated out the Netconf::VERSION into a separate file. kudos: request by multiple folks
 - Converted files from MS-DOS format to Unix; stripped out all of MS-DOS format kruft. kudos: jof
 
@@ -44,18 +44,17 @@ NOTE: If you intend to use `Netconf::Serial` you will need to ensure that the `s
 
 ## 0.2.4, 2012-01-16
 ### Added
-- <command> support for Junos RPC
+- `command` support for Junos RPC
 
 ## 0.2.2, 2012-01-14
 Tested against Tail-F "confD" server
 
 ### Added
-- RFC required <rpc> namespace and message-id attributes
+- RFC required `rpc` namespace and `message-id` attributes
 
 ## 0.2.1, 2012-01-09
 ### Added
-- support for Net::SCP accessor in SSH transport. See example code "scp.rb";
-    you will need to explicity require 'net/scp' in your top-level code
+- support for Net::SCP accessor in SSH transport. See example code [scp.rb](examples/jnpr/scp.rb); you will need to explicity require 'net/scp' in your top-level code
 
 ## 0.2.0, 2012-01-06
 Tested against JUNOS devices
