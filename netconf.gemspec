@@ -11,12 +11,13 @@ Gem::Specification.new do |s|
   s.authors = ["Jeremy Schulman", "Ankit Jain", "David Gethings"]
   s.email = 'dgjnpr@gmail.com'
   s.files = FileList['lib/net/**/*.rb', 'examples/**/*.rb']
-  s.add_dependency('nokogiri', '>= 1.5.5')
-  s.add_dependency('net-ssh', '>= 2.5.2')
-  s.add_dependency('net-scp')
+  s.required_ruby_version = '>= 2.1.0'
+  s.add_runtime_dependency('nokogiri', '~> 1.7')
+  s.add_runtime_dependency('net-ssh', '-> 4.1')
+  s.add_runtime_dependency('net-scp', '~> 1.2')
   # s.add_development_dependency('rake', '~> 12.0')
   # s.add_development_dependency('rspec-core', '~> 3.5')
   # s.add_development_dependency('rspec-expectations', '~> 3.5')
-  # s.add_development_dependency('cucumber', '~> 2.4')
+  s.add_development_dependency('cucumber', '~> 2.4')
   s.add_development_dependency('rubocop', '~> 0.48')
 end
