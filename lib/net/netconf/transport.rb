@@ -148,7 +148,7 @@ module Netconf
       # @@@/JLS: might this be <ok> ? isn't for Junos, but need to check
       # @@@/JLS: the generic case.
       
-      rsp_nx.first_element_child
+      rsp_nx.element_children
       
     end
     
