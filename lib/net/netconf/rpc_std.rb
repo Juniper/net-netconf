@@ -5,7 +5,7 @@ module Netconf
     MSG_END = ']]>]]>'
     MSG_END_RE = /\]\]>\]\]>[\r\n]*$/
     MSG_CLOSE_SESSION = '<rpc><close-session/></rpc>'
-    MSG_HELLO = <<~EOM
+    MSG_HELLO = <<-EOM
       <hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
         <capabilities>
           <capability>urn:ietf:params:netconf:base:1.0</capability>
@@ -98,7 +98,7 @@ module Netconf
 
         toplevel = options[:toplevel] if options[:toplevel]
 
-        rpc_str = <<~EO_RPC
+        rpc_str = <<-EO_RPC
           <rpc>
             <edit-config>
                <target><#{target}/></target>
