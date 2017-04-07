@@ -5,19 +5,19 @@ module Netconf
     MSG_END = ']]>]]>'
     MSG_END_RE = /\]\]>\]\]>[\r\n]*$/
     MSG_CLOSE_SESSION = '<rpc><close-session/></rpc>'
-    MSG_HELLO = <<-EOM
-      <hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-        <capabilities>
-          <capability>urn:ietf:params:netconf:base:1.0</capability>
-        </capabilities>
-      </hello>
+    MSG_HELLO = <<-EOM.gsub(/\s+\|/, '')
+      |<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+      |  <capabilities>
+      |    <capability>urn:ietf:params:netconf:base:1.0</capability>
+      |  </capabilities>
+      |</hello>
     EOM
 
     module Standard
       def lock(target)
-        rpc = Nokogiri::XML("<rpc><lock><target><#{target}/></target></lock></rpc>").root
-        Netconf::RPC.set_exception(rpc, Netconf::LockError)
-        @trans.rpc_exec(rpc)
+        run_valid_or_lock_rpc("<lock><target><#{target}/></target></lock>",
+                              Netconf::LockError)
+
       end
 
       def unlock(target)
@@ -26,8 +26,14 @@ module Netconf
       end
 
       def validate(source)
-        rpc = Nokogiri::XML("<rpc><validate><source><#{source}/></source></validate></rpc>").root
-        Netconf::RPC.set_exception(rpc, Netconf::ValidateError)
+        run_valid_or_lock_rpc("<validate><source><#{source}/></source></validate>",
+                              Netconf::ValidateError)
+
+      end
+
+      def run_valid_or_lock_rpc(rpc_string, error_type)
+        rpc = Nokogiri::XML("<rpc>#{rpc_string}</rpc>").root
+        Netconf::RPC.set_exception(rpc, error_type)
         @trans.rpc_exec(rpc)
       end
 
@@ -42,22 +48,26 @@ module Netconf
         @trans.rpc_exec(rpc)
       end
 
-      def get_config(*args) # :yield: filter_builder
-        source = 'running'    # default source is 'running'
-        filter = nil          # no filter by default
-
+      def process_args(args)
         while arg = args.shift
           case arg.class.to_s
           when /^Nokogiri/
             filter = case arg
-                     when Nokogiri::XML::Builder  then arg.doc.root
-                     when Nokogiri::XML::Document then arg.root
-                     else arg
-                     end
+              when Nokogiri::XML::Builder  then arg.doc.root
+              when Nokogiri::XML::Document then arg.root
+              else arg
+              end
           when 'Hash' then attrs = arg
           when 'String' then source = arg
           end
         end
+      end
+
+      def get_config(*args) # :yield: filter_builder
+        source = 'running'    # default source is 'running'
+        filter = nil          # no filter by default
+
+        arg = process_args(args)
 
         rpc = Nokogiri::XML("<rpc><get-config><source><#{source}/></source></get-config></rpc>").root
 
@@ -83,28 +93,16 @@ module Netconf
         config = nil
         options = {}
 
-        while arg = args.shift
-          case arg.class.to_s
-          when /^Nokogiri/
-            config = case arg
-                     when Nokogiri::XML::Builder  then arg.doc.root
-                     when Nokogiri::XML::Document then arg.root
-                     else arg
-                     end
-          when 'Hash' then options = arg
-          when 'String' then target = arg
-          end
-        end
-
+        arg = process_args(args)
         toplevel = options[:toplevel] if options[:toplevel]
 
-        rpc_str = <<-EO_RPC
-          <rpc>
-            <edit-config>
-               <target><#{target}/></target>
-               <#{toplevel}/>
-            </edit-config>
-          </rpc>
+        rpc_str = <<-EO_RPC.gsub(/^\s*\|/, '')
+          |<rpc>
+          |  <edit-config>
+          |     <target><#{target}/></target>
+          |     <#{toplevel}/>
+          |  </edit-config>
+          |</rpc>
         EO_RPC
 
         rpc = Nokogiri::XML(rpc_str).root

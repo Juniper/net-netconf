@@ -11,7 +11,7 @@ module Netconf
       # extend this instance with the capabilities of the specific console
       # type; it needs to define #login and #start_netconf session
       begin
-        extend Netconf::const_get(os_type)::TransTelnet
+        extend Netconf.const_get(os_type).TransTelnet
       rescue NameError
         # no extensions available ...
       end

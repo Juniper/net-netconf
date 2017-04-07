@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'net/ssh'
+require 'net/netconf/ssh'
 
 module Netconf
   class SSH < Netconf::Transport
@@ -13,18 +14,18 @@ module Netconf
 
       # extend this instance with the capabilities of the specific os_type
       begin
-        extend Netconf::const_get(@args[:os_type])::TransSSH
+        extend Netconf.const_get(@args[:os_type]).TransSSH
       rescue NameError
         # no extensions available ...
       end
 
-      @trans = Hash.new
+      @trans = {}
       super(&block)
     end
 
     def trans_open(&block)
       # open a connection to the NETCONF subsystem
-      start_args = Hash.new
+      start_args = {}
       start_args[:password] ||= @args[:password]
       start_args[:passphrase] = @args[:passphrase] || nil
       start_args[:port] = @args[:port] || NETCONF_PORT
@@ -32,9 +33,11 @@ module Netconf
 
       begin
         @trans[:conn] = Net::SSH.start(@args[:target], @args[:username], start_args)
-        @trans[:chan] = @trans[:conn].open_channel { |ch| ch.subsystem(NETCONF_SUBSYSTEM) }
-      rescue Errno::ECONNREFUSED
-        if respond_to? 'trans_on_connect_refused'
+        @trans[:chan] = @trans[:conn].open_channel do |ch|
+          ch.subsystem(NETCONF_SUBSYSTEM)
+        end
+      rescue Errno::ECONNREFUSED => e
+        if self.respond_to? 'trans_on_connect_refused'
           return trans_on_connect_refused(start_args)
         end
         return nil
@@ -86,9 +89,10 @@ module Netconf
     # accessor to create an Net::SCP object so the caller can perform
     # secure-copy operations (see Net::SCP) for details
     def scp
-      @scp ||= Net::SCP.start(@args[:target], @args[:username], password: @args[:password])
+      @scp ||= Net::SCP.start(@args[:target],
+                              @args[:username],
+                              password: @args[:password],
+                              port: @args[:port] || 22)
     end
   end # class: SSH
 end # module: Netconf
-
-require 'net/netconf/ssh'

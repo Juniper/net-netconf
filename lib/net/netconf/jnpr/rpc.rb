@@ -31,17 +31,21 @@ module Netconf
         @trans.rpc_exec(rpc)
       end
 
+      def nokogiri_case(arg)
+        filter = case arg
+                 when Nokogiri::XML::Builder  then arg.doc.root
+                 when Nokogiri::XML::Document then arg.root
+                 else arg
+                 end
+      end
+
       def get_configuration(*args)
         filter = nil
 
         while arg = args.shift
           case arg.class.to_s
           when /^Nokogiri/
-            filter = case arg
-                     when Nokogiri::XML::Builder  then arg.doc.root
-                     when Nokogiri::XML::Document then arg.root
-                     else arg
-                     end
+            nokogiri_case(arg)
           when 'Hash' then attrs = arg
           end
         end
@@ -68,11 +72,7 @@ module Netconf
         while arg = args.shift
           case arg.class.to_s
           when /^Nokogiri/
-            config = case arg
-                     when Nokogiri::XML::Builder  then arg.doc.root
-                     when Nokogiri::XML::Document then arg.root
-                     else arg
-                     end
+            nokogiri_case(arg)
           when 'Hash' then attrs.merge! arg
           when 'Array' then config = arg.join("\n")
           when 'String' then config = arg
@@ -120,7 +120,7 @@ module Netconf
         # set a specific exception class on this RPC so it can be
         # properlly handled by the calling enviornment
 
-        Netconf::RPC::set_exception(rpc, Netconf::EditError)
+        Netconf::RPC.set_exception(rpc, Netconf::EditError)
         @trans.rpc_exec(rpc)
       end # load_configuration
 
@@ -148,6 +148,12 @@ module Netconf
           end
         end
         @trans.rpc_exec(rpc_nx)
+      end
+
+      def rollback(n = 0)
+        ArgumentError "rollback between 0 and 49 only" unless n.between?(0,49)
+        reply = load_configuration(rollback: n)
+        !reply.xpath('//ok').empty? # return true or false to indicate success or not
       end
     end # module: JUNOS
   end # module: RPC
