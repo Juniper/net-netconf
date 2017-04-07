@@ -53,10 +53,10 @@ module Netconf
           case arg.class.to_s
           when /^Nokogiri/
             filter = case arg
-              when Nokogiri::XML::Builder  then arg.doc.root
-              when Nokogiri::XML::Document then arg.root
-              else arg
-              end
+                     when Nokogiri::XML::Builder  then arg.doc.root
+                     when Nokogiri::XML::Document then arg.root
+                     else arg
+                     end
           when 'Hash' then attrs = arg
           when 'String' then source = arg
           end
