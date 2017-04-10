@@ -1,15 +1,14 @@
 begin
-  require 'cucumber'
-  require 'cucumber/rake/task'
+  require 'rspec/core/rake_task'
 
-  Cucumber::Rake::Task.new(:features) do |t|
-    t.cucumber_opts = "--format pretty"
+  RSpec::Core::RakeTask.new(:spec) do |t|
+    t.pattern = Dir.glob('spec/**/*spec.rb')
   end
 
-  task default: :features
+  task default: :spec
 rescue LoadError
-  desc 'Cucumber rake task not available'
+  desc 'RSpec rake task not available'
   task :features do
-    abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
+    abort 'RSpec rake task is not available. Be sure to install rspec as a gem'
   end
 end
