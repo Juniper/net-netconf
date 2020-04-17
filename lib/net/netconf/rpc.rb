@@ -20,21 +20,22 @@ module Netconf
       # autogenerate an <rpc>, converting underscores (_)
       # to hyphens (-) along the way ...
 
-      def self.method_missing(method, params = nil, attrs = nil)
+      def self.method_missing(method, params = nil, attrs = nil, &block)
         rpc_name = method.to_s.tr('_', '-').to_sym
 
         # build the XML starting at <rpc>, envelope the <method>
         # toplevel element, then create name/value elements for each
         # of the additional params. An element without a value should
         # simply be set to true
-        rpc_nx = if params
+        rpc_nx = if params || block
                    Nokogiri::XML::Builder.new do |xml|
                      xml.rpc do
                        xml.send(rpc_name) do
                          params.each do |k, v|
                            sym = k.to_s.tr('_', '-').to_sym
                            xml.send(sym, v == true ? nil : v)
-                         end
+                         end if params
+                         block.call(xml) if block
                        end
                      end
                    end.doc.root
@@ -65,8 +66,8 @@ module Netconf
         end
       end
 
-      def method_missing(method, params = nil, attrs = nil)
-        @trans.rpc_exec(Netconf::RPC::Builder.send(method, params, attrs))
+      def method_missing(method, params = nil, attrs = nil, &block)
+        @trans.rpc_exec(Netconf::RPC::Builder.send(method, params, attrs, &block))
       end
     end # class: Executor
   end # module: RPC
